@@ -1,0 +1,40 @@
+{% extends "equipment/base.html" %}
+
+{% block title %}All Equipment — Equipment Tracker{% endblock %}
+
+{% block content %}
+<h1>Equipment Tracker</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Serial</th>
+      <th>Location</th>
+      <th>Next Due</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for equipment in equipments %}
+      <tr>
+        <td>{{ equipment.name }}</td>
+        <td>{{ equipment.serial_number }}</td>
+        <td>{{ equipment.location }}</td>
+        <td>
+          {% if equipment.next_due_date %}
+            {{ equipment.next_due_date|date:"SHORT_DATE_FORMAT" }}
+          {% else %}
+            Not scheduled
+          {% endif %}
+        </td>
+        <td>{{ equipment.status }}</td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="5">No equipment found.</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

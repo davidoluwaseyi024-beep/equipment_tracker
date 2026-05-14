@@ -1,0 +1,18 @@
+                   {# Reusable status badge component. Usage: {% include "equipment/_status_badge.html" with status=equipment.status %}
+The `with` keyword creates a scoped variable called `status` that is only available inside this included template.
+It does not pollute the parent template's context. `only` can be appended to fully isolate the include from the parent context
+(useful for performance in large templates): {% include "equipment/_status_badge.html" with status=equipment.status only %} #}
+
+<span class="badge
+  {% if status == 'in_service' %}bg-success
+  {% elif status == 'under_maintenance' %}bg-warning
+  {% elif status == 'out_of_service' %}bg-danger
+  {% else %}bg-secondary
+  {% endif %}
+  ">
+  {% if status == "in_service" %}In Service
+  {% elif status == "under_maintenance" %}Under Maintenance
+  {% elif status == "out_of_service" %}Out of Service
+  {% else %}Unknown
+  {% endif %}
+</span>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Equipment Tracker{% endblock %}</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f7f7f7; margin: 0; }
+        .container { max-width: 1000px; margin: 40px auto; padding: 20px; background: white; border-radius: 10px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: left; }
+        th { background: #f1f5f9; }
+        tr:nth-child(even) { background: #fafafa; }
+        .nav { margin-bottom: 20px; }
+        .nav a { margin-right: 15px; text-decoration: none; color: #2563eb; }
+        .badge-red { color: #b91c1c; font-weight: bold; }
+        .badge-orange { color: #b45309; font-weight: bold; }
+        .badge-green { color: #15803d; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="/">All Equipment</a>
+            <a href="/overdue/">Overdue</a>
+        </div>
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
