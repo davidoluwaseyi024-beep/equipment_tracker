@@ -1,0 +1,43 @@
+{% extends "equipment/base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+
+<h1>Dashboard</h1>
+<p>Welcome to your equipment management overview.</p>
+
+<div class="card-grid">
+    <div class="card">
+        <h3>Total Equipment</h3>
+        <p style="font-size:32px;">{{ total_equipment }}</p>
+    </div>
+    <div class="card">
+        <h3>Overdue</h3>
+        <p style="font-size:32px; color:#dc2626;">{{ overdue_equipment }}</p>
+    </div>
+    <div class="card">
+        <h3>Due Soon</h3>
+        <p style="font-size:32px; color:#d97706;">{{ due_soon_equipment }}</p>
+    </div>
+</div>
+
+<h2>Recent Items</h2>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Serial Number</th>
+        <th>Location</th>
+        <th>Next Due</th>
+        <th>Status</th>
+    </tr>
+    {% for item in recent_items %}
+    <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.serial_number }}</td>
+        <td>{{ item.location }}</td>
+        <td>{{ item.next_due_date }}</td>
+        <td>{{ item.status }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
