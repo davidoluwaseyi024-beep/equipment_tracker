@@ -5,6 +5,8 @@
 <h1>Dashboard</h1>
 <p>Welcome to your equipment management overview.</p>
 
+
+
 <div class="card-grid">
     <div class="card">
         <h3>Total Equipment</h3>
@@ -39,5 +41,21 @@
     </tr>
     {% endfor %}
 </table>
-
 {% endblock %}
+
+{% block contact %}
+contact us on our mail hahaha@gmail.com
+{% endblock %}
+
+{% block summary %}
+        <h1>SUMMARY</h1>
+        <p>the total equipment is {{ total_equipment }}</p>
+        <p>The overdue equipment for service is {{overdue_equipment}}</p>
+        <p> The equipment that will be due soon is {{due_soon_equipment}}</p>
+        <p>The total num of equipment in good condition is {{ in_condition_good }}</p>
+        <p>The total num of equipment in fair condition is {{ in_condition_fair }}</p>
+        <p>The total num of equipment in poor condition is {{ in_condition_poor }}</p>
+        <p>Equipment at IN SERVICE {{ in_status_condition_in_service }}</p>
+        <p>Equipment at UNDER MAINTENANCE {{ in_status_condition_under_maintenance }}</p>
+        <p>Equipment at OUT OF SERVICE {{ in_status_condition_out_of_service }}</p>
+        {% endblock %}

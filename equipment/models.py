@@ -3,10 +3,6 @@ from django.utils import timezone
 
 
 class Equipment(models.Model):
-
-    # ------------------------------------------------------------------ #
-    # Choices
-    # ------------------------------------------------------------------ #
     class Condition(models.TextChoices):
         GOOD = "good", "Good"
         FAIR = "fair", "Fair"
@@ -16,11 +12,7 @@ class Equipment(models.Model):
         IN_SERVICE        = "in_service",        "In Service"
         UNDER_MAINTENANCE = "under_maintenance",  "Under Maintenance"
         OUT_OF_SERVICE    = "out_of_service",     "Out of Service"
-
-    # ------------------------------------------------------------------ #
-    # Identity fields
-    # ------------------------------------------------------------------ #
-    name = models.CharField(
+    name = models.CharField(   #charfied is for short value like name and i use it when i want a short structured with max length
         max_length=200,
         help_text="Full descriptive name, e.g. 'Centrifugal Pump P-101'.",
     )
@@ -30,10 +22,6 @@ class Equipment(models.Model):
         db_index=True,
         help_text="Manufacturer serial number. Must be globally unique.",
     )
-
-    # ------------------------------------------------------------------ #
-    # Location & state
-    # ------------------------------------------------------------------ #
     location = models.CharField(
         max_length=200,
         help_text="Current physical location, e.g. 'Lagos Depot - Loading Bay 2'.",
@@ -57,9 +45,6 @@ class Equipment(models.Model):
         help_text="Mark True for safety- or production-critical equipment.",
     )
 
-    # ------------------------------------------------------------------ #
-    # Service schedule
-    # ------------------------------------------------------------------ #
     last_service_date = models.DateField(
         null=True,
         blank=True,
@@ -71,25 +56,14 @@ class Equipment(models.Model):
         db_index=True,
         help_text="Next scheduled service date. Used for overdue alerts.",
     )
-
-    # ------------------------------------------------------------------ #
-    # Free-text
-    # ------------------------------------------------------------------ #
     notes = models.TextField(
         blank=True,
         default="",
         help_text="Additional remarks, fault history, or inspection notes.",
     )
-
-    # ------------------------------------------------------------------ #
-    # Audit timestamps (added for free — always useful in production)
-    # ------------------------------------------------------------------ #
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at  = models.DateTimeField(auto_now=True)
 
-    # ------------------------------------------------------------------ #
-    # Helpers
-    # ------------------------------------------------------------------ #
     @property
     def is_overdue(self) -> bool:
         """Returns True if next_due_date is set and in the past."""
@@ -97,12 +71,9 @@ class Equipment(models.Model):
             return False
         return self.next_due_date < timezone.now().date()
 
-    def __str__(self) -> str:
+    def __str__(self) -> str: #defines how your object should look when printed or shown as text. In Django, /
+        # it usually makes the admin panel something readable instead of a generic
         return f"{self.name} ({self.serial_number})"
-
-    # ------------------------------------------------------------------ #
-    # Meta
-    # ------------------------------------------------------------------ #
     class Meta:
         ordering = ["next_due_date"]   # NULLs sort last in most DBs
         verbose_name = "Equipment"

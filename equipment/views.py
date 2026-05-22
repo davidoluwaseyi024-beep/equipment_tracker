@@ -34,6 +34,13 @@ def dashboard(request):
     overdue_equipment = Equipment.objects.filter(next_due_date__lt=today).count()
     due_soon_equipment = Equipment.objects.filter(next_due_date=today).count()
     recent_items = Equipment.objects.all().order_by("next_due_date")[:5]
+    in_status_condition_in_service = Equipment.objects.filter(status="in_service").count()
+    in_status_condition_under_maintenance = Equipment.objects.filter(status="under_maintenance").count()
+    in_status_condition_out_of_service = Equipment.objects.filter(status="out_of_service").count()
+    in_condition_good = Equipment.objects.filter(condition="good").count()
+    in_condition_fair = Equipment.objects.filter(condition="fair").count()
+    in_condition_poor = Equipment.objects.filter(condition="poor").count()
+
 
     context = {
         "total_equipment": total_equipment,
@@ -41,6 +48,12 @@ def dashboard(request):
         "due_soon_equipment": due_soon_equipment,
         "recent_items": recent_items,
         "page_title": "Dashboard",
+        "in_status_condition_in_service": in_status_condition_in_service,
+        "in_status_condition_under_maintenance": in_status_condition_under_maintenance,
+        "in_status_condition_out_of_service": in_status_condition_out_of_service,
+        "in_condition_good": in_condition_good,
+        "in_condition_fair": in_condition_fair,
+        "in_condition_poor": in_condition_poor,
     }
     return render(request, "equipment/dashboard.html", context)
 
@@ -85,3 +98,5 @@ def equipment_overdue(request):
 def logout_view(request):
     logout(request)
     return redirect("landing")
+
+
