@@ -1,4 +1,5 @@
 from decouple import config
+import dj_database_url
 """
 Django settings for equipment_tracker project.
 
@@ -76,15 +77,10 @@ WSGI_APPLICATION = 'equipment_tracker.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', default='5432'),
-    }
+
+
+DATABASES= {
+    'default': dj_database_url.config(default=config('DATABASE_URL'))
 }
 
 
