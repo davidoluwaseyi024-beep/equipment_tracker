@@ -27,7 +27,9 @@ SECRET_KEY = 'django-insecure-99aml7ycc&jqcb3!nt+k96x)6rnex+d5!ixwl698^3xrkfm#$e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'equipment-tracker-woad.vercel.app'
+]
 
 
 # Application definition
