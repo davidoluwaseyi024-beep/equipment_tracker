@@ -29,6 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'equipment-tracker-woad.vercel.app'
+        '.vercel.app',
 ]
 
 
